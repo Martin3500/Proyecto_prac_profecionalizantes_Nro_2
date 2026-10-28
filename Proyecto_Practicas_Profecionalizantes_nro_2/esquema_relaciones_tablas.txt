@@ -1,0 +1,175 @@
+================================================================================
+           SISTEMA DE GESTION DE GIMNASIO - ESQUEMA Y RELACIONES DE TABLAS
+================================================================================
+Base de datos: Sis_Gestion_GYM
+Fecha de actualizacion: 2026-10-05
+Origen: Analisis de scripts SQL ('02_crear_tablas.sql',
+        '03_roles_y_usuarios.sql') y codigo PHP del panel administrativo.
+
+--------------------------------------------------------------------------------
+1. RESUMEN GENERAL DE TABLAS EN USO
+--------------------------------------------------------------------------------
+El sistema opera con 10 tablas activas divididas en administración general, 
+socios, tarifas, operaciones diarias y control de acceso:
+
+A. TABLAS PRINCIPALES ACTIVAS:
+   1. roles                   -> Catalogo de roles de usuarios (admin, staff).
+   2. usuarios                -> Cuentas de acceso al panel asociadas a un rol.
+   3. estado_cliente          -> Catalogo de estados de clientes (Activo, Inactivo, etc.).
+   4. clientes                -> Registro principal de socios/clientes del gimnasio.
+   5. entrenadores            -> Datos de los profesores/entrenadores.
+   6. disciplinas             -> Catalogo de actividades (Crossfit, Spinning, etc.).
+   7. entrenadoresxdisciplinas -> Tabla asociativa (N a M) entre entrenadores y disciplinas.
+   8. tarifas                 -> Planes de precios asignados a entrenadores.
+   9. historial_de_pagos      -> Registro de cobros realizados a clientes por tarifa.
+  10. historia_de_asistencia  -> Registro de asistencias diarias de clientes.
+
+(Nota: Se eliminaron las tablas en desuso tipos_de_clase, turnos_de_clase, clixtipoclase, 
+clase_disponible, tipos_movimientos e historial_movimientos).
+
+
+
+--------------------------------------------------------------------------------
+3. DETALLE DE RELACIONES ENTRE TABLAS ACTIVAS
+--------------------------------------------------------------------------------
+
+1. estado_cliente (1) ----< (N) clientes
+   - Clave foranea: clientes.id_estado -> estado_cliente.ID_est_clientes
+   - Restriccion: fk_cliente_estado
+   - Logica: Cada cliente debe tener un estado asignado ('Activo', 'Inactivo', 
+     'Pausado', 'Suspension'). Un estado agrupa a multiples clientes.
+
+2. clientes (1) ----< (N) historia_de_asistencia
+   - Clave foranea: historia_de_asistencia.id_cliente -> clientes.id_cliente
+   - Restriccion: fk_asistencia_cliente
+   - Logica: Cada asistencia pertenece obligatoriamente a un cliente. Un cliente
+     acumula multiples registros historicos de asistencia por dia/hora.
+
+3. clientes (1) ----< (N) historial_de_pagos
+   - Clave foranea: historial_de_pagos.id_cliente -> clientes.id_cliente
+   - Restriccion: fk_pago_cliente
+   - Logica: Cada pago efectuado corresponde a un cliente del gimnasio.
+
+4. tarifas (1) ----< (N) historial_de_pagos
+   - Clave foranea: historial_de_pagos.id_tarifa -> tarifas.id_tarifa
+   - Restriccion: fk_pago_tarifa
+   - Logica: Cada registro de cobro hace referencia al plan o tarifa contratada
+     (y su respectivo monto facturado).
+
+5. entrenadores (1) ----< (N) tarifas
+   - Clave foranea: tarifas.id_entrenador -> entrenadores.id_entrenador
+   - Restriccion: fk_tarifas_entrenadores
+   - Logica: Toda tarifa/plan esta vinculada a un entrenador especifico responsable
+     de brindar el servicio.
+
+6. entrenadores (N) <---- (N:M) ----> (M) disciplinas
+   - Mediante tabla asociativa: entrenadoresxdisciplinas
+   - Clave foranea 1: entrenadoresxdisciplinas.id_entrenador -> entrenadores.id_entrenador
+     (fk_exd_entrenador)
+   - Clave foranea 2: entrenadoresxdisciplinas.id_disciplina -> disciplinas.id_disciplina
+     (fk_exd_disciplina)
+   - Logica: Un entrenador puede impartir una o mas disciplinas, y una disciplina 
+     puede ser dictada por multiples entrenadores.
+
+7. roles (1) ----< (N) usuarios
+   - Clave foranea: usuarios.id_rol -> roles.id_rol
+   - Restriccion: fk_usuarios_roles
+   - Logica: Cada usuario del sistema tiene asignado un rol específico ('admin', 'staff', etc.)
+     proveniente del catálogo independiente de roles.
+
+
+--------------------------------------------------------------------------------
+4. DICCIONARIO DE DATOS Y ESPECIFICACION DE TABLAS ACTIVAS
+--------------------------------------------------------------------------------
+
+[TABLA: roles]
+- Descripcion: Catalogo de roles asignables a usuarios del sistema.
+- Columnas:
+  * id_rol           INT AUTO_INCREMENT        [PK]
+  * nombre           VARCHAR(50) NOT NULL      [UNIQUE]
+  * descripcion      VARCHAR(255) NULL
+
+[TABLA: usuarios]
+- Descripcion: Cuentas de usuarios con acceso al panel de administracion.
+- Columnas:
+  * id_usuario       INT AUTO_INCREMENT        [PK]
+  * usuario          VARCHAR(50) NOT NULL      [UNIQUE]
+  * password         VARCHAR(255) NOT NULL     (Hash bcrypt/argon2)
+  * nombre           VARCHAR(100) NULL
+  * id_rol           INT NOT NULL              [FK -> roles.id_rol]
+  * activo           TINYINT(1) NOT NULL       DEFAULT 1
+  * fecha_creacion   DATETIME NOT NULL         DEFAULT CURRENT_TIMESTAMP
+
+[TABLA: estado_cliente]
+- Descripcion: Estados operativos de los socios.
+- Columnas:
+  * ID_est_clientes  INT AUTO_INCREMENT        [PK]
+  * Estado           VARCHAR(150) NOT NULL
+  * Descripcion      VARCHAR(500) NULL
+
+[TABLA: clientes]
+- Descripcion: Datos personales e informacion de contacto de los clientes.
+- Columnas:
+  * id_cliente       INT AUTO_INCREMENT        [PK]
+  * DNI              INT(8) NOT NULL           [UNIQUE]
+  * nombre           VARCHAR(100) NOT NULL
+  * apellido         VARCHAR(100) NOT NULL
+  * email            VARCHAR(100) NULL
+  * telefono         VARCHAR(20) NULL
+  * id_estado        INT NOT NULL              [FK -> estado_cliente.ID_est_clientes]
+
+[TABLA: entrenadores]
+- Descripcion: Ficha de profesores y entrenadores del gimnasio.
+- Columnas:
+  * id_entrenador    INT AUTO_INCREMENT        [PK]
+  * DNI              INT(8) NOT NULL           [UNIQUE]
+  * nombre           VARCHAR(100) NOT NULL
+  * apellido         VARCHAR(100) NOT NULL
+  * email            VARCHAR(100) NULL
+  * telefono         VARCHAR(20) NULL
+
+[TABLA: disciplinas]
+- Descripcion: Disciplinas o actividades deportivas que se dictan en el establecimiento.
+- Columnas:
+  * id_disciplina    INT AUTO_INCREMENT        [PK]
+  * disciplina       VARCHAR(150) NOT NULL
+  * descripcion      TEXT NULL
+
+[TABLA: entrenadoresxdisciplinas]
+- Descripcion: Tabla intermedia que vincula entrenadores con las disciplinas que dictan.
+- Columnas:
+  * id_entrenador_disciplina INT AUTO_INCREMENT [PK]
+  * id_entrenador            INT NOT NULL       [FK -> entrenadores.id_entrenador]
+  * id_disciplina            INT NOT NULL       [FK -> disciplinas.id_disciplina]
+
+[TABLA: tarifas]
+- Descripcion: Planes, cuotas y precios de servicios asociados a cada entrenador.
+- Columnas:
+  * id_tarifa        INT AUTO_INCREMENT        [PK]
+  * id_entrenador    INT NOT NULL              [FK -> entrenadores.id_entrenador]
+  * nombre           VARCHAR(100) NOT NULL
+  * monto            DECIMAL(10,2) NOT NULL
+  * descripcion      TEXT NULL
+
+[TABLA: historial_de_pagos]
+- Descripcion: Transacciones y comprobantes de cobro realizados a clientes.
+- Columnas:
+  * id_pago           INT AUTO_INCREMENT        [PK]
+  * id_cliente        INT NOT NULL              [FK -> clientes.id_cliente]
+  * id_tarifa         INT NOT NULL              [FK -> tarifas.id_tarifa]
+  * monto             DECIMAL(10,2) NOT NULL
+  * metodo_pago       VARCHAR(50) NOT NULL      DEFAULT 'Efectivo'
+  * fecha_pago        DATETIME NOT NULL         DEFAULT CURRENT_TIMESTAMP
+  * fecha_vencimiento DATE NULL                 (Vencimiento de la cuota abonada)
+
+[TABLA: historia_de_asistencia]
+- Descripcion: Registro de entradas / asistencias de los clientes.
+- Columnas:
+  * id_asistencia    INT AUTO_INCREMENT        [PK]
+  * id_cliente       INT NOT NULL              [FK -> clientes.id_cliente]
+  * fecha_hora       DATETIME NOT NULL         DEFAULT CURRENT_TIMESTAMP
+  * asistio          TINYINT(1) NULL           DEFAULT 1
+
+================================================================================
+Fin del reporte de esquema.
+================================================================================

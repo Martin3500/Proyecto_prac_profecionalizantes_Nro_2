@@ -1,0 +1,10 @@
+/* ==========================================
+   HOJA DE ESTILOS PRINCIPAL (style.css)
+   ========================================== */
+
+@import url('base.css');
+@import url('components.css');
+@import url('layout.css');
+@import url('landing.css');
+@import url('login.css');
+@import url('dashboard.css');

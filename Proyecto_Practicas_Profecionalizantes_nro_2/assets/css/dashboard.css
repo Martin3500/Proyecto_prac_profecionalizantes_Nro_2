@@ -1,0 +1,413 @@
+/* ==========================================
+   ESTILOS DE DASHBOARD (dashboard.css)
+   ========================================== */
+
+/* Cabecera del Panel */
+.panel-header {
+    margin-bottom: 2rem;
+}
+
+.panel-header .eyebrow {
+    margin-bottom: 0.5rem;
+}
+
+.titulo-pagina {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    letter-spacing: -0.02em;
+}
+
+.subt {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
+}
+
+/* Grilla de Métricas */
+.cards-metricas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.card-metrica {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.card-metrica:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.icono-metrica {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icono-metrica .icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Variantes de Color para Métricas */
+.card-metrica.azul .icono-metrica {
+    background-color: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+.card-metrica.azul:hover { border-color: rgba(59, 130, 246, 0.4); }
+
+.card-metrica.verde .icono-metrica {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+.card-metrica.verde:hover { border-color: rgba(34, 197, 94, 0.4); }
+
+.card-metrica.naranja .icono-metrica {
+    background-color: rgba(249, 115, 22, 0.15);
+    color: #fb923c;
+}
+.card-metrica.naranja:hover { border-color: rgba(249, 115, 22, 0.4); }
+
+.card-metrica.gris .icono-metrica {
+    background-color: rgba(148, 163, 184, 0.15);
+    color: #cbd5e1;
+}
+.card-metrica.gris:hover { border-color: rgba(148, 163, 184, 0.4); }
+
+.info-metrica .valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.2;
+}
+
+.info-metrica .etiqueta {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+}
+
+/* Diseño de 2 Columnas */
+.fila-dos-columnas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.panel-bloque {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-bloque-cabecera {
+    margin-bottom: 1.5rem;
+}
+
+.titulo-bloque {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+/* Gráfico de Barras CSS */
+.grafico-barras {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem;
+    height: 220px;
+    padding-top: 2rem;
+}
+
+.gb-columna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.gb-barra-wrap {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+}
+
+.gb-barra {
+    width: 70%;
+    max-width: 36px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    transition: height 0.4s ease, background-color var(--transition-fast);
+    position: relative;
+    cursor: pointer;
+}
+
+.gb-barra:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.gb-barra.gb-actual {
+    background-color: var(--color-primary);
+    box-shadow: 0 0 12px rgba(255, 51, 102, 0.4);
+}
+
+/* Tooltip con valor sobre las barras */
+.gb-barra::after {
+    content: attr(data-valor);
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    background-color: var(--color-bg-dark);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+}
+
+.gb-barra:hover::after {
+    opacity: 1;
+}
+
+.gb-etiqueta {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.75rem;
+}
+
+.gb-etiqueta-actual {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+/* Tabla de Últimos Pagos */
+.tabla-scroll {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.tabla th {
+    padding: 0.75rem 1rem;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tabla td {
+    padding: 0.9rem 1rem;
+    color: var(--color-text-main);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tabla tbody tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.col-fecha {
+    color: var(--color-text-muted);
+}
+
+.col-monto {
+    font-weight: 700;
+    color: var(--color-whatsapp);
+}
+
+.celda-vacia {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: 2rem 1rem;
+}
+
+/* Alineación de Cabecera con Botón de Acción */
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+/* Alerta de Éxito / Confirmación */
+.alerta.ok {
+    background-color: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.alerta.ok .icon {
+    color: #22c55e;
+}
+
+/* Badges de Estado */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.badge.activo {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badge.inactivo {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge.pausado,
+.badge.suspension {
+    background-color: rgba(249, 115, 22, 0.15);
+    color: #fb923c;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+/* Acciones en la Tabla */
+.acciones {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.acciones form {
+    display: inline-flex;
+    margin: 0;
+}
+
+.btn-accion {
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    font-family: inherit;
+    line-height: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-editar, .btn-reactivar {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+}
+
+.btn-editar:hover, .btn-reactivar:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.btn-baja {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.btn-baja:hover {
+    background-color: rgba(239, 68, 68, 0.25);
+    color: #ffffff;
+}
+
+/* Layout del Formulario e Inputs */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.campo label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-bg-dark);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-main);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.2);
+}
+
+select.form-control option {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-main);
+}
+
+.form-acciones {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.alerta.info {
+    background-color: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
+}
+
+.alerta.info .icon {
+    color: #60a5fa;
+}

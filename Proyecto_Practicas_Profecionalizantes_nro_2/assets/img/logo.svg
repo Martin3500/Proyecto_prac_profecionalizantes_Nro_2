@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 56">
+  <defs>
+    <linearGradient id="cobre" x1="0" y1="0" x2="0" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb923c"/>
+      <stop offset="1" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="barra" x1="0" y1="0" x2="0" y2="12" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9ca3af"/>
+      <stop offset="1" stop-color="#4b5563"/>
+    </linearGradient>
+  </defs>
+  <rect x="18" y="24" width="64" height="8" rx="4" fill="url(#barra)"/>
+  <rect x="4" y="8" width="14" height="40" rx="5" fill="url(#cobre)"/>
+  <rect x="4" y="8" width="4.5" height="40" rx="2.2" fill="#9a3412"/>
+  <rect x="82" y="8" width="14" height="40" rx="5" fill="url(#cobre)"/>
+  <rect x="91.5" y="8" width="4.5" height="40" rx="2.2" fill="#9a3412"/>
+</svg>

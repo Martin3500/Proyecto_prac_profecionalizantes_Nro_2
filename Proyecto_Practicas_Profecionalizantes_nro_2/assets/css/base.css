@@ -1,0 +1,70 @@
+/* ==========================================
+   VARIABLES Y ESTILOS BASE (base.css)
+   ========================================== */
+
+:root {
+    /* Paleta de Colores */
+    --color-primary: #ff3366;
+    --color-primary-hover: #e02452;
+    --color-bg-dark: #0f172a;
+    --color-bg-card: #1e293b;
+    --color-bg-light: #f8fafc;
+    --color-text-main: #f8fafc;
+    --color-text-muted: #94a3b8;
+    --color-text-dark: #0f172a;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-whatsapp: #25d366;
+    --color-whatsapp-hover: #20ba5a;
+
+    /* Tipografías */
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+
+    /* Bordes y Sombras */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
+    --shadow-glow: 0 0 25px rgba(255, 51, 102, 0.35);
+
+    /* Transiciones */
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

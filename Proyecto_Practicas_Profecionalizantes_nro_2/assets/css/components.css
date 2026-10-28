@@ -1,0 +1,345 @@
+/* ==========================================
+   COMPONENTES REUTILIZABLES (components.css)
+   ========================================== */
+
+/* Íconos SVG General */
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all var(--transition-smooth);
+    text-align: center;
+}
+
+
+/* Botón WhatsApp */
+.btn-whatsapp {
+    background-color: var(--color-whatsapp);
+    color: #ffffff;
+}
+
+.btn-whatsapp:hover {
+    background-color: var(--color-whatsapp-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp .icon {
+    stroke: none;
+    fill: currentColor;
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+/* Botón Outline */
+.btn-outline {
+    background-color: transparent;
+    border-color: var(--color-border);
+    color: var(--color-text-main);
+}
+
+.btn-outline:hover {
+    border-color: var(--color-primary);
+    background-color: rgba(255, 51, 102, 0.1);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Eyebrows / Etiquetas destacadas */
+.eyebrow, 
+.eyebrow-claro {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.eyebrow {
+    background-color: rgba(255, 51, 102, 0.15);
+    color: var(--color-primary);
+    border: 1px solid rgba(255, 51, 102, 0.3);
+}
+
+.eyebrow-claro {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-muted);
+}
+
+/* Punto animado de estatus */
+.punto {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px var(--color-primary);
+    animation: pulso 2s infinite;
+}
+
+@keyframes pulso {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(255, 51, 102, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 51, 102, 0); }
+}
+
+.alerta.info {
+    background-color: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
+}
+
+.alerta.info .icon {
+    color: #60a5fa;
+}
+/* ==========================================
+   ESTILOS ADICIONALES PARA FORMULARIOS E INPUTS
+   ========================================== */
+
+/* Contenedor relativo para iconos dentro de inputs */
+.campo-icono {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.campo-icono > .icon {
+    position: absolute;
+    left: 0.9rem;
+    color: var(--color-text-muted);
+    pointer-events: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    z-index: 1;
+}
+
+/* Espaciado para texto cuando hay un ícono a la izquierda */
+.form-control.con-icono {
+    padding-left: 2.6rem;
+}
+
+/* Flecha personalizada y estilizada para los <select> */
+select.form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+/* Estilo de las opciones desplegables dentro del select */
+select.form-control option {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-main);
+    padding: 0.6rem;
+}
+
+/* Ajuste de flechas/contadores en inputs tipo number */
+input[type="number"].form-control::-webkit-inner-spin-button,
+input[type="number"].form-control::-webkit-outer-spin-button {
+    filter: invert(1);
+    opacity: 0.6;
+}
+
+/* Estados deshabilitados en controles de formulario */
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Estilos para alertas genéricas y avisos informativos */
+.alerta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.aviso-info,
+.alerta.info {
+    background-color: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #93c5fd;
+}
+
+.aviso-info .icon,
+.alerta.info .icon {
+    color: #60a5fa;
+}
+
+/* Soporte de ícono interno en elementos select estilizados */
+.campo-icono select.form-control.con-icono {
+    padding-left: 2.6rem;
+    padding-right: 2.5rem;
+}
+
+/* ==========================================
+   ESTILOS DE BUSCADOR Y LIMITADOR
+   ========================================== */
+.barra-busqueda {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.form-busqueda {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    max-width: 540px;
+}
+
+.form-busqueda .campo-icono {
+    flex: 1;
+}
+
+.form-busqueda .form-control {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+}
+
+.form-busqueda .btn {
+    padding: 0.65rem 1.15rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.badge-limite {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+}
+
+.badge-limite .icon {
+    width: 0.95rem;
+    height: 0.95rem;
+}
+
+.aviso-busqueda {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 0.6rem 0.9rem;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-primary);
+}
+
+/* ==========================================
+   ESTILOS DE PAGINACIÓN
+   ========================================== */
+.paginacion-barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.paginacion-info {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.paginacion-info strong {
+    color: var(--color-text-main);
+}
+
+.paginacion-controles {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.pag-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 0.65rem;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.pag-btn:hover:not(.deshabilitado):not(.activo) {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.pag-btn.activo {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.pag-btn.deshabilitado {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pag-puntos {
+    color: var(--color-text-muted);
+    padding: 0 0.25rem;
+    font-size: 0.85rem;
+}

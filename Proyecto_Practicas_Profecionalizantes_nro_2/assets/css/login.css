@@ -1,0 +1,308 @@
+/* ==========================================
+   ESTILOS DE LOGIN (login.css)
+   ========================================== */
+
+.login-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-dark);
+    padding: 1.5rem;
+}
+
+.login-wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    width: 100%;
+    max-width: 980px;
+    min-height: 540px;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+/* Panel Izquierdo */
+.login-panel-marca {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%),
+                radial-gradient(circle at top left, rgba(255, 51, 102, 0.15), transparent 60%);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--color-border);
+}
+
+.login-panel-marca .marca {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    margin-bottom: 2rem;
+}
+
+.login-panel-marca .logo-img {
+    height: 36px;
+    width: auto;
+}
+
+.login-texto h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+}
+
+.login-texto p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Widget Clima y Hora */
+.widget-clima {
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    backdrop-filter: blur(8px);
+    margin-top: 2rem;
+}
+
+.wc-hora {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-main);
+    letter-spacing: 0.02em;
+}
+
+.wc-fecha {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.wc-separador {
+    height: 1px;
+    background-color: var(--color-border);
+}
+
+.wc-clima-fila {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.wc-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wc-icono .icon {
+    width: 28px;
+    height: 28px;
+}
+
+.wc-ciudad {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+}
+
+.wc-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+/* Panel Derecho: Formulario */
+.login-panel-form {
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-bg-card);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.volver:hover {
+    color: var(--color-primary);
+}
+
+.login-card h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-main);
+}
+
+/* Alerta de Error */
+.alerta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    background-color: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-sm);
+    color: #fca5a5;
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
+}
+
+.alerta .icon {
+    color: #f87171;
+    flex-shrink: 0;
+}
+
+/* Formulario e Inputs */
+.campo {
+    margin-bottom: 1.25rem;
+}
+
+.campo-icono {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.campo-icono > .icon {
+    position: absolute;
+    left: 0.9rem;
+    color: var(--color-text-muted);
+    pointer-events: none;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.campo-icono input[type="text"],
+.campo-icono input[type="password"] {
+    width: 100%;
+    padding: 0.85rem 2.8rem 0.85rem 2.6rem;
+    background-color: var(--color-bg-dark);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-main);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.campo-icono input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.2);
+}
+
+.campo-icono input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.7;
+}
+
+/* Botón Revelar Contraseña */
+.alt-clave {
+    position: absolute;
+    right: 0.6rem;
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast);
+}
+
+.alt-clave:hover {
+    color: var(--color-text-main);
+}
+
+/* Checkbox Recordar */
+.campo-check {
+    margin-bottom: 1.5rem;
+}
+
+.campo-check label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    user-select: none;
+}
+
+.campo-check input[type="checkbox"] {
+    accent-color: var(--color-primary);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Botón Principal */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Responsivo para celulares */
+@media (max-width: 868px) {
+    .login-wrap {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+    }
+
+    .login-panel-marca {
+        display: none;
+    }
+
+    .login-panel-form {
+        padding: 2.5rem 1.5rem;
+    }
+}
